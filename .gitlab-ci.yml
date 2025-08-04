@@ -1,0 +1,12 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: python:3.10
+  before_script:
+    - pip install --no-cache-dir -r requirements.txt
+  script:
+    - python app.py &
+    - sleep 5
+    - curl http://localhost:5000 | grep "Hello from Flask"
